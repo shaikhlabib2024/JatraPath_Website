@@ -1,0 +1,43 @@
+.safety-page {
+  padding-top: 100px;
+  min-height: 100vh;
+  background: #f5f7fa;
+}
+
+.safety-hero {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.safety-hero h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.safety-section {
+  width: 90%;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
+.safety-section h2 {
+  margin-bottom: 20px;
+}
+
+.safety-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.tips-list {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+}
+
+.tips-list li {
+  margin-bottom: 15px;
+}

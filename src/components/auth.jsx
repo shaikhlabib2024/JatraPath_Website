@@ -1,49 +1,52 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/components/auth.css";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const form = new FormData(e.target);
+    const form = new FormData(e.target);
 
-  const url = isLogin
-    ? "http://localhost/JatraPath_Website/backend/controllers/login.php"
-    : "http://localhost/JatraPath_Website/backend/controllers/register.php";
+    const url = isLogin
+      ? "http://localhost/JatraPath_Website/backend/controllers/login.php"
+      : "http://localhost/JatraPath_Website/backend/controllers/register.php";
 
-  const res = await fetch(url, {
-    method: "POST",
-    body: form,
-  });
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        body: form,
+      });
 
-  const data = await res.json(); // ✅ IMPORTANT FIX
+      const data = await res.json();
 
-  console.log("SERVER RESPONSE:", data);
+      console.log("SERVER RESPONSE:", data);
 
-  if (data.status === "success") {
-    localStorage.setItem("user", JSON.stringify(data.user)); // ✅ SAVE USER
+      if (data.status === "success") {
+        localStorage.setItem("user", JSON.stringify(data.user));
 
-    alert("Login Success");
+        alert(isLogin ? "Login Success" : "Registration Success");
+        navigate("/user");
+      } 
+      else if (data.status === "invalid_password") {
+        alert("Wrong password");
+      } 
+      else if (data.status === "user_not_found") {
+        alert("User not found");
+      } 
+      else {
+        alert("Something went wrong");
+      }
 
-    window.location.href = "http://localhost:5173/JatraPath_Website/user";
-  } 
-  else if (data.status === "invalid_password") {
-    alert("Wrong password");
-  } 
-  else if (data.status === "user_not_found") {
-    alert("User not found");
-  } 
-  else if (data === "success") {
-    // fallback for register
-    setIsLogin(true);
-    alert("Registered successfully. Now login!");
-  } 
-  else {
-    alert(data);
-  }
-};
+    } catch (err) {
+      console.error(err);
+      alert("Server error or CORS issue");
+    }
+  };
 
   return (
     <div className="auth-wrapper">
@@ -61,27 +64,12 @@ const Auth = () => {
         <form className="auth-form" onSubmit={handleSubmit}>
 
           {!isLogin && (
-            <input
-              type="text"
-              name="name"
-              placeholder="Full Name"
-              required
-            />
+            <input type="text" name="name" placeholder="Full Name" required />
           )}
 
-          <input
-            type="email"
-            name="email"
-            placeholder="Email Address"
-            required
-          />
+          <input type="email" name="email" placeholder="Email Address" required />
 
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-          />
+          <input type="password" name="password" placeholder="Password" required />
 
           {!isLogin && (
             <input

@@ -1,8 +1,35 @@
+import { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./../../styles/pages/user/Overview.css";
 
 const Overview = () => {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("http://localhost/jatrapath/api/overview.php", {
+      credentials: "include",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setData(res);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, []);
 
   const user = JSON.parse(localStorage.getItem("user"));
+
+  if (loading) {
+    return (
+      <div className="overview-page">
+        <p>Loading dashboard...</p>
+      </div>
+    );
+  }
 
   return (
     <div className="overview-page">
@@ -11,12 +38,13 @@ const Overview = () => {
       <div className="overview-hero">
 
         <div className="overview-left">
+
           <span className="welcome-badge">
             ✈ Welcome Back
           </span>
 
           <h1>
-            Hello, {user?.name || "Traveler"} 👋
+            Hello, {data?.user?.name || user?.name || "Traveler"} 👋
           </h1>
 
           <p>
@@ -25,14 +53,19 @@ const Overview = () => {
           </p>
 
           <div className="hero-actions">
-            <button className="primary-btn">
+
+            
+
+            <Link to="/user/destinations" className="primary-btn">
               Explore Destinations
-            </button>
+            </Link>
 
             <button className="secondary-btn">
               View Orders
             </button>
+
           </div>
+
         </div>
 
         <div className="overview-right">
@@ -60,13 +93,13 @@ const Overview = () => {
 
         <div className="stats-card">
           <h4>Total Orders</h4>
-          <h2>12</h2>
+          <h2>{data?.stats?.orders || 0}</h2>
           <p>Completed bookings</p>
         </div>
 
         <div className="stats-card">
           <h4>Cart Items</h4>
-          <h2>5</h2>
+          <h2>{data?.stats?.cart_items || 0}</h2>
           <p>Trips waiting checkout</p>
         </div>
 

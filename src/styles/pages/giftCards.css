@@ -1,0 +1,162 @@
+.giftcards-page {
+  padding-top: 110px;
+  min-height: 100vh;
+  background: #f5f6f8;
+  padding-bottom: 80px;
+}
+
+.giftcards-hero {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.giftcards-hero h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #071952;
+  margin-bottom: 10px;
+}
+
+.giftcards-hero p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.giftcards-grid {
+  width: 92%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 35px;
+}
+
+.gift-card {
+  background: white;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.35s ease;
+}
+
+.gift-card:hover {
+  transform: translateY(-10px);
+}
+
+.gift-image-container {
+  position: relative;
+}
+
+.gift-image-container img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.gift-overlay {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 8px 16px;
+  border-radius: 30px;
+  color: white;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+.gift-card-content {
+  padding: 25px;
+  text-align: center;
+}
+
+.gift-card-content h2 {
+  font-size: 2rem;
+  color: #111;
+  margin-bottom: 12px;
+}
+
+.gift-card-content p {
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.gift-divider {
+  width: 100%;
+  height: 1px;
+  background: #e5e5e5;
+  margin-bottom: 20px;
+}
+
+.price-tag {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #00b894;
+  margin-bottom: 20px;
+}
+
+.gift-card button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 40px;
+  background: #00b894;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.gift-card button:hover {
+  background: #009e7f;
+}
+
+.terms-section {
+  width: 92%;
+  margin: 70px auto 0;
+  background: white;
+  border-radius: 22px;
+  padding: 40px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+}
+
+.terms-section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #071952;
+}
+
+.terms-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.term-card {
+  background: #f7f8fa;
+  padding: 22px;
+  border-radius: 16px;
+  color: #444;
+  line-height: 1.7;
+}
+
+@media (max-width: 1100px) {
+  .giftcards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .giftcards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .terms-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .giftcards-hero h1 {
+    font-size: 2.2rem;
+  }
+}

@@ -1,0 +1,57 @@
+.info-page {
+  padding-top: 110px;
+  min-height: 100vh;
+  background: #f5f6f8;
+  padding-bottom: 80px;
+}
+
+.info-hero {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.info-hero h1 {
+  font-size: 3rem;
+  color: #071952;
+  margin-bottom: 15px;
+}
+
+.info-hero p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.info-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.info-card {
+  background: white;
+  padding: 35px;
+  border-radius: 20px;
+  margin-bottom: 25px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.info-card h2 {
+  margin-bottom: 15px;
+  color: #111;
+}
+
+.info-card p {
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+  .info-hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .info-card {
+    padding: 25px;
+  }
+}
