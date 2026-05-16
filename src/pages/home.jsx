@@ -44,14 +44,14 @@ const Home = () => {
 
   return (
     <div className="background">
-
+      <div className="circle1"></div>
+      <div className="circle2"></div>
       <Layout>
 
         <HeroSlider />
-
         <section className="hero">
 
-          {/* LEFT */}
+          {/* LEFT SIDE */}
           <div className="hero-left">
             <span className="hero-tag">✈ Explore Bangladesh Smarter</span>
 
@@ -92,7 +92,7 @@ const Home = () => {
             </div>
           </div>
 
-          {/* RIGHT */}
+          {/* RIGHT SIDE */}
           <div className="hero-right">
 
             <div className="glass-card main-card image-slider">
@@ -123,10 +123,73 @@ const Home = () => {
           </div>
 
         </section>
+        <section className="section featured">
+          <h2>Featured Destinations</h2>
+          <p>Top places travelers love in Bangladesh</p>
+
+          <div className="grid">
+            {slides.map((item, i) => (
+              <div className="card" key={i}>
+                <img src={item.img} alt={item.title} />
+                <div className="card-body">
+                  <h3>{item.title}</h3>
+                  <p>{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="section why">
+          <h2>Why Choose JatraPath?</h2>
+
+          <div className="features">
+            <div className="feature-box">🌍 100+ Destinations</div>
+            <div className="feature-box">💰 Best Travel Deals</div>
+            <div className="feature-box">🧭 Smart Trip Planning</div>
+            <div className="feature-box">📱 Easy Booking System</div>
+          </div>
+        </section>
+        <section className="section popular">
+          <h2>Popular Places</h2>
+
+          <div className="popular-grid">
+            {slides.map((item, i) => (
+              <div className="popular-card" key={i}>
+                <img src={item.img} />
+                <div className="overlay-text">
+                  <h3>{item.title}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+        <section className="section testimonials">
+          <h2>What Travelers Say</h2>
+
+          <div className="testimonial-box">
+            <p>"JatraPath helped me explore Bangladesh like never before!"</p>
+            <h4>- Rahim Uddin</h4>
+          </div>
+
+          <div className="testimonial-box">
+            <p>"Easy booking and amazing destinations."</p>
+            <h4>- Sara Khan</h4>
+          </div>
+        </section>
+        <section className="section newsletter">
+          <h2>Get Travel Updates</h2>
+          <p>Subscribe for latest destinations & offers</p>
+
+          <div className="newsletter-box">
+            <input type="email" placeholder="Enter your email" />
+            <button>Subscribe</button>
+          </div>
+        </section>
+
       </Layout>
+
     </div>
   );
 };
 
 export default Home;
-
