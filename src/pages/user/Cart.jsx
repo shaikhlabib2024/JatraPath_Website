@@ -204,11 +204,12 @@ const Cart = () => {
 
                     </div>
 
-                    <button
-                      onClick={() => removeItem(item.id)}
-                    >
-                      ✕
-                    </button>
+<button
+  className="remove-btn"
+  onClick={() => removeItem(item.id)}
+>
+  ✕
+</button>
 
                   </div>
 
