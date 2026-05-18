@@ -14,36 +14,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 include "../config/db.php";
 
-/* LOGIN CHECK */
+/* CHECK LOGIN */
 if (!isset($_SESSION['user_id'])) {
 
     echo json_encode([
-        "status" => "not_logged_in"
+        "status" => "error",
+        "message" => "User not logged in"
     ]);
 
     exit();
 }
 
-$id = $_POST['id'] ?? '';
+$user_id = $_SESSION['user_id'];
 
-if (!$id) {
+$title = $_POST['title'] ?? '';
+$price = $_POST['price'] ?? 0;
+$category = $_POST['category'] ?? '';
 
-    echo json_encode([
-        "status" => "missing_id"
-    ]);
+/* INSERT ORDER */
+$sql = "INSERT INTO giftcard_orders
+(user_id, title, category, price)
+VALUES (?, ?, ?, ?)";
 
-    exit();
-}
+$stmt = $conn->prepare($sql);
 
-/* DELETE */
-$query = $conn->prepare("
-    DELETE FROM cart
-    WHERE id = ?
-");
+$stmt->bind_param(
+    "issi",
+    $user_id,
+    $title,
+    $category,
+    $price
+);
 
-$query->bind_param("i", $id);
-
-if ($query->execute()) {
+if ($stmt->execute()) {
 
     echo json_encode([
         "status" => "success"
@@ -53,7 +56,7 @@ if ($query->execute()) {
 
     echo json_encode([
         "status" => "error",
-        "message" => $query->error
+        "message" => $stmt->error
     ]);
 }
 ?>

@@ -1,64 +1,177 @@
 import { useState } from "react";
 import "../../styles/pages/user/GiftCards.css";
 
+import Anniversary from "../../assets/images/Anniversary.jpeg";
+import Eidmubarak from "../../assets/images/Eidmubarak.jpeg";
+import Birthday from "../../assets/images/Birthday.jpeg";
+import Family from "../../assets/images/Family.jpeg";
+import Adventure from "../../assets/images/Adventure.jpeg";
+import Holiday from "../../assets/images/Holiday.jpeg";
+
 const giftCardsData = [
   {
     id: 1,
-    name: "Travel Explorer Card",
-    category: "Adventure",
-    image:
-      "https://i.pinimg.com/736x/0d/8f/1d/0d8f1d9a7d2c5e8b4d3f0a1d0d2c9b1f.jpg",
-    price: "৳3000",
+    title: "Birthday Special",
+    category: "Birthday",
+    description:
+      "Celebrate their special day with unforgettable journeys.",
+    image: Birthday,
+    price: 5000,
   },
+
   {
     id: 2,
-    name: "Luxury Escape Card",
-    category: "Luxury",
-    image:
-      "https://i.pinimg.com/736x/3a/2b/9c/3a2b9c4a8d1e6f7c5b2a1d0e9f8c7b6a.jpg",
-    price: "৳5000",
+    title: "Eid Mubarak",
+    category: "Festival",
+    description:
+      "Share the joy of Eid with memorable travel gifts.",
+    image: Eidmubarak,
+    price: 10000,
   },
+
   {
     id: 3,
-    name: "Foodie Delight Card",
-    category: "Food",
-    image:
-      "https://i.pinimg.com/736x/1c/5d/7e/1c5d7e9a2b4c6d8f0a1b2c3d4e5f6a7b.jpg",
-    price: "৳1500",
+    title: "Anniversary Tour",
+    category: "Couple",
+    description:
+      "Make their anniversary even more special.",
+    image: Anniversary,
+    price: 15000,
   },
+
   {
     id: 4,
-    name: "Budget Saver Card",
-    category: "Budget",
-    image:
-      "https://i.pinimg.com/736x/9f/8e/7d/9f8e7d6c5b4a3210f9e8d7c6b5a4d3c2.jpg",
-    price: "৳1000",
+    title: "Family Vacation",
+    category: "Family",
+    description:
+      "Create beautiful memories with your loved ones.",
+    image: Family,
+    price: 20000,
+  },
+
+  {
+    id: 5,
+    title: "Adventure Escape",
+    category: "Adventure",
+    description:
+      "For thrill-seekers and explorers at heart.",
+    image: Adventure,
+    price: 10000,
+  },
+
+  {
+    id: 6,
+    title: "Holiday Surprise",
+    category: "Holiday",
+    description:
+      "Surprise them with the gift of travel and joy.",
+    image: Holiday,
+    price: 5000,
   },
 ];
 
 const GiftCards = () => {
+
   const [search, setSearch] = useState("");
-  const [activeCategory, setActiveCategory] = useState("All");
 
-  const categories = ["All", "Adventure", "Luxury", "Food", "Budget"];
+  const [activeCategory, setActiveCategory] =
+    useState("All");
 
+  const categories = [
+    "All",
+    "Birthday",
+    "Festival",
+    "Couple",
+    "Family",
+    "Adventure",
+    "Holiday",
+  ];
+
+  /* FILTER */
   const filteredCards = giftCardsData.filter((card) => {
-    const matchSearch = card.name.toLowerCase().includes(search.toLowerCase());
+
+    const matchSearch =
+      card.title
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
     const matchCategory =
-      activeCategory === "All" || card.category === activeCategory;
+      activeCategory === "All" ||
+      card.category === activeCategory;
 
     return matchSearch && matchCategory;
   });
 
+  /* BUY NOW */
+  const handleBuyNow = async (card) => {
+
+    try {
+
+      const user = JSON.parse(
+        localStorage.getItem("user")
+      );
+
+      if (!user) {
+
+        alert("Please login first");
+
+        return;
+      }
+
+      const formData = new FormData();
+
+      formData.append("title", card.title);
+      formData.append("price", card.price);
+      formData.append("category", card.category);
+
+      const response = await fetch(
+        "http://localhost/JatraPath_Website/backend/api/buy_giftcard.php",
+        {
+          method: "POST",
+          credentials: "include",
+          body: formData,
+        }
+      );
+
+      const data = await response.json();
+
+      console.log(data);
+
+      if (data.status === "success") {
+
+        alert("Gift Card Purchased Successfully!");
+
+      } else {
+
+        alert(data.message || "Purchase failed");
+
+      }
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert("Server Error");
+
+    }
+  };
+
   return (
+
     <div className="giftcards-page">
 
       {/* HEADER */}
       <div className="giftcards-header">
 
         <div>
+
           <h1>Gift Cards 🎁</h1>
-          <p>Buy travel gift cards for yourself or someone special.</p>
+
+          <p>
+            Buy travel gift cards for yourself
+            or someone special.
+          </p>
+
         </div>
 
         {/* SEARCH */}
@@ -68,53 +181,149 @@ const GiftCards = () => {
             type="text"
             placeholder="Search gift cards..."
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) =>
+              setSearch(e.target.value)
+            }
           />
 
-          <button>Search</button>
+          <button>
+            Search
+          </button>
 
         </div>
+
       </div>
 
       {/* FILTERS */}
       <div className="giftcards-filters">
+
         {categories.map((cat) => (
+
           <button
             key={cat}
-            className={activeCategory === cat ? "active-filter" : ""}
-            onClick={() => setActiveCategory(cat)}
+            className={
+              activeCategory === cat
+                ? "active-filter"
+                : ""
+            }
+            onClick={() =>
+              setActiveCategory(cat)
+            }
           >
             {cat}
           </button>
+
         ))}
+
       </div>
 
       {/* GRID */}
       <div className="giftcards-grid">
 
         {filteredCards.map((card) => (
-          <div className="giftcard-card" key={card.id}>
 
+          <div
+            className="giftcard-card"
+            key={card.id}
+          >
+
+            {/* IMAGE */}
             <div className="giftcard-image">
-              <img src={card.image} alt={card.name} />
+
+              <img
+                src={card.image}
+                alt={card.title}
+              />
 
               <span className="giftcard-price">
-                {card.price}
+                ৳ {card.price.toLocaleString()}
               </span>
+
             </div>
 
+            {/* CONTENT */}
             <div className="giftcard-content">
-              <h3>{card.name}</h3>
-              <p>📦 {card.category}</p>
+
+              <h3>{card.title}</h3>
+
+              <p className="giftcard-category">
+                📦 {card.category}
+              </p>
+
+              <p className="giftcard-description">
+                {card.description}
+              </p>
 
               <div className="giftcard-actions">
-                <button className="view-btn">View Details</button>
-                <button className="buy-btn">Buy Now</button>
+
+                <button className="view-btn">
+                  View Details
+                </button>
+
+                <button
+                  className="buy-btn"
+                  onClick={() =>
+                    handleBuyNow(card)
+                  }
+                >
+                  Buy Now
+                </button>
+
               </div>
+
             </div>
 
           </div>
+
         ))}
+
+      </div>
+
+      {/* TERMS */}
+      <div className="terms-section">
+
+        <h2>
+          Terms & Conditions
+        </h2>
+
+        <div className="terms-grid">
+
+          <div className="term-card">
+            <p>
+              Gift cards are valid for
+              1 year from purchase date.
+            </p>
+          </div>
+
+          <div className="term-card">
+            <p>
+              Gift cards are non-refundable
+              and non-transferable.
+            </p>
+          </div>
+
+          <div className="term-card">
+            <p>
+              Gift cards can only be used
+              on JatraPath services.
+            </p>
+          </div>
+
+          <div className="term-card">
+            <p>
+              One gift card can be used
+              per booking.
+            </p>
+          </div>
+
+          <div className="term-card">
+            <p>
+              Lost or expired cards
+              will not be replaced.
+            </p>
+          </div>
+
+        </div>
 
       </div>
 

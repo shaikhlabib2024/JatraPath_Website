@@ -113,18 +113,31 @@
   transform: translateY(-8px);
 }
 
-/* IMAGE */
+/* IMAGE FIXED */
 .giftcard-image {
   position: relative;
-  height: 240px;
+  aspect-ratio: 4 / 2.2;   /* IMPORTANT: makes all images uniform */
+  overflow: hidden;
+
+  background: #f1f5f9;
 }
 
 .giftcard-image img {
   width: 100%;
   height: 100%;
+
   object-fit: cover;
+  object-position: center;
+
+  display: block;
+  transition: transform 0.4s ease;
 }
 
+.giftcard-card:hover .giftcard-image img {
+  transform: scale(1.05);
+}
+
+/* PRICE TAG */
 .giftcard-price {
   position: absolute;
   top: 15px;
@@ -217,9 +230,5 @@
 
   .giftcard-actions {
     flex-direction: column;
-  }
-
-  .giftcard-image {
-    height: 210px;
   }
 }

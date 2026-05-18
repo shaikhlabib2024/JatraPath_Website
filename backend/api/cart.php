@@ -1,38 +1,52 @@
 <?php
+session_start();
+
 header("Access-Control-Allow-Origin: http://localhost:5173");
 header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: GET, OPTIONS");
 header("Content-Type: application/json");
 
-session_start();
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
 include "../config/db.php";
 
+/* LOGIN CHECK */
 if (!isset($_SESSION['user_id'])) {
-    echo json_encode(["status" => "unauthorized"]);
+
+    echo json_encode([
+        "status" => "not_logged_in"
+    ]);
+
     exit();
 }
 
 $user_id = $_SESSION['user_id'];
 
-$sql = "
-SELECT 
-    c.id as cart_id,
-    c.persons,
-    d.id,
-    d.name,
-    d.location,
-    d.image,
-    d.price,
-    d.days
-FROM cart c
-JOIN destinations d ON c.destination_id = d.id
-WHERE c.user_id = ?
-";
+/* FETCH CART */
+$query = $conn->prepare("
+    SELECT
+        cart.id,
+        cart.persons,
+        destinations.name,
+        destinations.location,
+        destinations.price,
+        destinations.image,
+        destinations.days
+    FROM cart
+    JOIN destinations
+    ON cart.destination_id = destinations.id
+    WHERE cart.user_id = ?
+");
 
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
+$query->bind_param("i", $user_id);
 
-$result = $stmt->get_result();
+$query->execute();
+
+$result = $query->get_result();
 
 $cart = [];
 
