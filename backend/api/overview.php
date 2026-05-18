@@ -30,7 +30,9 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-/* USER */
+/* =========================
+   USER INFO
+========================= */
 $userQuery = $conn->prepare(
     "SELECT id, name, email
      FROM users
@@ -38,46 +40,61 @@ $userQuery = $conn->prepare(
 );
 
 $userQuery->bind_param("i", $user_id);
+
 $userQuery->execute();
 
 $userResult = $userQuery->get_result();
+
 $user = $userResult->fetch_assoc();
 
-/* CART COUNT */
+/* =========================
+   CART COUNT
+========================= */
 $cartQuery = $conn->prepare(
-    "SELECT COUNT(*) as total
+    "SELECT COUNT(*) AS total
      FROM cart
      WHERE user_id = ?"
 );
 
 $cartQuery->bind_param("i", $user_id);
+
 $cartQuery->execute();
 
 $cartResult = $cartQuery->get_result();
+
 $cartData = $cartResult->fetch_assoc();
 
-/* ORDERS COUNT */
+/* =========================
+   ORDERS COUNT
+========================= */
 $orderQuery = $conn->prepare(
-    "SELECT COUNT(*) as total
+    "SELECT COUNT(*) AS total
      FROM orders_table
      WHERE user_id = ?"
 );
 
 $orderQuery->bind_param("i", $user_id);
+
 $orderQuery->execute();
 
 $orderResult = $orderQuery->get_result();
+
 $orderData = $orderResult->fetch_assoc();
 
-/* RESPONSE */
+/* =========================
+   RESPONSE
+========================= */
 echo json_encode([
+
     "status" => "success",
 
     "user" => $user,
 
     "stats" => [
-        "orders" => $orderData['total'] ?? 0,
-        "cart_items" => $cartData['total'] ?? 0
+
+        "orders" => (int)($orderData['total'] ?? 0),
+
+        "cart_items" => (int)($cartData['total'] ?? 0)
     ]
 ]);
 ?>

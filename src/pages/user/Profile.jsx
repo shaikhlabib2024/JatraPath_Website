@@ -10,9 +10,8 @@ const Profile = () => {
 
     localStorage.removeItem("user");
 
-    navigate("/login");
+    window.location.href = "/";
   };
-
   return (
     <div className="profile-page">
 

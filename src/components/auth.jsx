@@ -24,9 +24,9 @@ const Auth = () => {
 
       const text = await res.text();
 
-console.log(text);
+      console.log(text);
 
-const data = JSON.parse(text);
+      const data = JSON.parse(text);
 
       console.log("SERVER RESPONSE:", data);
 
@@ -35,15 +35,24 @@ const data = JSON.parse(text);
 
         alert(isLogin ? "Login Success" : "Registration Success");
         navigate("/user");
-      } 
+      }
       else if (data.status === "invalid_password") {
         alert("Wrong password");
-      } 
+      }
       else if (data.status === "user_not_found") {
         alert("User not found");
-      } 
+      }
+      else if ( data.status === "email_exists" ) {
+        alert("Email already registered");
+      }
       else {
-        alert("Something went wrong");
+        console.log("FULL SERVER RESPONSE:", data);
+
+        alert(
+          data.message ||
+          data.error ||
+          JSON.stringify(data)
+        );
       }
 
     } catch (err) {
