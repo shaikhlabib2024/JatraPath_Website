@@ -34,7 +34,11 @@ const Auth = () => {
         localStorage.setItem("user", JSON.stringify(data.user));
 
         alert(isLogin ? "Login Success" : "Registration Success");
-        navigate("/user");
+        if (data.user.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/user");
+        }
       }
       else if (data.status === "invalid_password") {
         alert("Wrong password");
@@ -42,7 +46,7 @@ const Auth = () => {
       else if (data.status === "user_not_found") {
         alert("User not found");
       }
-      else if ( data.status === "email_exists" ) {
+      else if (data.status === "email_exists") {
         alert("Email already registered");
       }
       else {

@@ -20,59 +20,67 @@ import DestinationDetails from "./pages/destinationDetails.jsx";
 
 import Cart from "./pages/user/Cart.jsx";
 
+import ScrollToTop from "./components/ScrollToTop";
+import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
 import "./styles/App.css";
 
 function App() {
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
 
-      {/* HOME */}
-      <Route path="/" element={<Home />} />
+        {/* HOME */}
+        <Route path="/" element={<Home />} />
 
-      {/* AUTH */}
-      <Route path="/login" element={<Auth />} />
+        {/* AUTH */}
+        <Route path="/login" element={<Auth />} />
 
-      {/* DESTINATIONS */}
-      <Route path="/destinations" element={<Destinations />} />
+        {/* DESTINATIONS */}
+        <Route path="/destinations" element={<Destinations />} />
 
-      {/* DESTINATION DETAILS */}
-      <Route path="/destination/:id" element={<DestinationDetails />} />
+        {/* DESTINATION DETAILS */}
+        <Route path="/destination/:id" element={<DestinationDetails />} />
 
-      {/* USER DASHBOARD */}
-      <Route path="/user" element={<UserDashboard />} />
+        {/* USER DASHBOARD */}
+        <Route path="/user" element={<UserDashboard />} />
 
-      {/* USER DESTINATIONS */}
-      <Route
-        path="/user/destinations"
-        element={<DestinationsUser />}
-      />
+        {/* USER DESTINATIONS */}
+        <Route
+          path="/user/destinations"
+          element={<DestinationsUser />}
+        />
 
-      {/* CART */}
-      <Route path="/cart" element={<Cart />} />
+        {/* CART */}
+        <Route path="/cart" element={<Cart />} />
 
-      {/* SEARCH */}
-      <Route path="/search" element={<SearchResults />} />
+        {/* SEARCH */}
+        <Route path="/search" element={<SearchResults />} />
 
-      {/* GIFT CARDS */}
-      <Route path="/gift-cards" element={<GiftCards />} />
+        {/* GIFT CARDS */}
+        <Route path="/gift-cards" element={<GiftCards />} />
 
-      {/* SAFETY INFO */}
-      <Route path="/safety-info" element={<SafetyInfo />} />
+        {/* SAFETY INFO */}
+        <Route path="/safety-info" element={<SafetyInfo />} />
 
-      {/* MORE DROPDOWN PAGES */}
-      <Route path="/blog" element={<Blog />} />
+        {/* MORE DROPDOWN PAGES */}
+        <Route path="/blog" element={<Blog />} />
 
-      <Route path="/contact" element={<Contact />} />
+        <Route path="/contact" element={<Contact />} />
 
-      <Route path="/faq" element={<FAQ />} />
+        <Route path="/faq" element={<FAQ />} />
 
-      <Route path="/terms" element={<Terms />} />
+        <Route path="/terms" element={<Terms />} />
 
-      <Route path="/privacy" element={<Privacy />} />
-      {/* FALLBACK */}
-      <Route path="*" element={<Home />} />
+        <Route path="/privacy" element={<Privacy />} />
 
-    </Routes>
+        {/* ADMIN DASHBOARD */}
+        <Route path="/admin" element={<AdminDashboard />} />
+        {/* FALLBACK */}
+        <Route path="*" element={<Home />} />
+
+      </Routes>
+    </>
   );
 }
 

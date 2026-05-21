@@ -1,0 +1,190 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+.admin-info {
+  margin-right: 15px;
+  font-weight: 600;
+  color: #0f172a;
+  background: #e2e8f0;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+/* ================= LAYOUT ================= */
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+  background: #f4f6fb;
+}
+
+/* ================= SIDEBAR ================= */
+.admin-sidebar {
+  width: 260px;
+  background: #0f172a;
+  color: white;
+  padding: 20px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+}
+
+.admin-sidebar .logo {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 25px;
+  color: #38bdf8;
+  font-weight: 700;
+}
+
+.admin-sidebar ul {
+  list-style: none;
+}
+
+.admin-sidebar li {
+  padding: 12px 14px;
+  margin: 8px 0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.admin-sidebar li:hover {
+  background: #1e293b;
+  transform: translateX(4px);
+}
+
+/* ================= MAIN ================= */
+.admin-main {
+  flex: 1;
+  padding: 25px;
+}
+
+/* ================= TOPBAR ================= */
+.admin-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 16px 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.admin-topbar h3 {
+  font-size: 18px;
+  color: #0f172a;
+}
+
+/* ================= LOGOUT ================= */
+.logout-btn {
+  background: #ef4444;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.logout-btn:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+/* ================= STATS ================= */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  text-align: center;
+  transition: 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+}
+
+.stat-card h4 {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.stat-card p {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 8px;
+  color: #0f172a;
+}
+
+/* ================= TABLE ================= */
+.recent-box {
+  background: white;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+th {
+  background: #f8fafc;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 900px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* 🔥 MOBILE: SIDEBAR HIDDEN (IMPORTANT) */
+@media (max-width: 768px) {
+
+  .admin-container {
+    flex-direction: column;
+  }
+
+  .admin-sidebar {
+    display: none; /* ✅ sidebar hidden on mobile */
+  }
+
+  .admin-main {
+    padding: 12px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-topbar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .logout-btn {
+    width: 100%;
+  }
+}
