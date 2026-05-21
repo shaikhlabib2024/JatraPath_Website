@@ -1,7 +1,10 @@
 import Layout from "../components/layout";
 import "../styles/pages/infoPages.css";
-
+import { useEffect } from "react";
 function Privacy() {
+  useEffect(() => {
+      document.title = "JatraPath | Privacy Policy";
+    }, []);
   return (
     <Layout>
       <div className="info-page">

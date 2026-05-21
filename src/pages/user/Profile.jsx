@@ -33,12 +33,28 @@ const Profile = () => {
   }, []);
 
   /* LOGOUT */
-  const handleLogout = () => {
+  const handleLogout = async () => {
+  try {
+    const res = await fetch(
+      "http://localhost/JatraPath_Website/backend/controllers/logout.php",
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
 
+    const data = await res.json();
+    console.log(data);
+
+    // clear frontend session
     localStorage.removeItem("user");
 
-    window.location.href = "/";
-  };
+    // redirect to login/home
+    navigate("/login"); // better than window.location
+  } catch (err) {
+    console.error("Logout failed:", err);
+  }
+};
 
   return (
     <div className="profile-page">

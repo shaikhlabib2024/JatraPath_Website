@@ -7,8 +7,11 @@ import Cart from "./user/Cart";
 import Orders from "./user/Orders";
 import Profile from "./user/Profile";
 import GiftCards from "./user/GiftCards";
-
+import { useEffect } from "react";
 const UserDashboard = () => {
+  useEffect(() => {
+    document.title = "JatraPath | User Dashboard";
+  }, []);
   const [activeTab, setActiveTab] = useState("overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
 

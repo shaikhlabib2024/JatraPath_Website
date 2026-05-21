@@ -9,6 +9,7 @@ $_SESSION = [];
 session_destroy();
 
 echo json_encode([
-    "status" => "logged_out"
+    "status" => "logged_out",
+    "message" => "Logged out successfully"
 ]);
 ?>

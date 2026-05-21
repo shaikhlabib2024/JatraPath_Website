@@ -1,7 +1,10 @@
 import Layout from "../components/layout";
 import "../styles/pages/infoPages.css";
-
+import { useEffect } from "react";
 function Terms() {
+  useEffect(() => {
+      document.title = "JatraPath | Terms of Service";
+    }, []);
   return (
     <Layout>
       <div className="info-page">

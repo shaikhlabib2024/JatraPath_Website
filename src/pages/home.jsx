@@ -33,7 +33,9 @@ const slides = [
 
 const Home = () => {
   const [index, setIndex] = useState(0);
-
+  useEffect(() => {
+    document.title = "JatraPath | Home";
+  }, []);
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % slides.length);

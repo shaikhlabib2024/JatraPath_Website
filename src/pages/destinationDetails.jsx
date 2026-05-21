@@ -4,9 +4,11 @@ import Layout from "../components/layout";
 import { destinations } from "../data/destinationsData";
 
 import "../styles/pages/destinationDetails.css";
-
+import { useEffect } from "react";
 const DestinationDetails = () => {
-
+  useEffect(() => {
+    document.title = "JatraPath | Destination Details";
+  }, []);
   const { id } = useParams();
 
   const place = destinations.find(

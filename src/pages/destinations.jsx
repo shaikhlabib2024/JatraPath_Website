@@ -1,11 +1,14 @@
 import Layout from "../components/layout";
 import DestinationCard from "../components/DestinationCard";
-
+import { useEffect } from "react";
 import { destinations } from "../data/destinationsData";
 
 import "../styles/pages/destinations.css";
 
 const Destinations = () => {
+  useEffect(() => {
+      document.title = "JatraPath | Destinations";
+    }, []);
   return (
     <Layout>
 

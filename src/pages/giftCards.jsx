@@ -7,6 +7,8 @@ import Birthday from "../assets/images/Birthday.jpeg";
 import Family from "../assets/images/Family.jpeg";
 import Adventure from "../assets/images/Adventure.jpeg";
 import Holiday from "../assets/images/Holiday.jpeg";
+
+import { useEffect } from "react";
 const giftCards = [
   {
     id: 1,
@@ -54,7 +56,9 @@ const giftCards = [
 
 const GiftCards = () => {
   const navigate = useNavigate();
-
+  useEffect(() => {
+    document.title = "JatraPath | Gift Cards";
+  }, []);
   const handleAddToCart = () => {
     navigate("/login");
   };

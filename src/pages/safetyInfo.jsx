@@ -1,7 +1,10 @@
 import Layout from "../components/layout";
 import "../styles/pages/safetyInfo.css";
-
+import { useEffect } from "react";
 function SafetyInfo() {
+  useEffect(() => {
+      document.title = "JatraPath | Safety Information";
+    }, []);
   return (
     <Layout>
       <div className="safety-page">

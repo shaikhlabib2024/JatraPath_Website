@@ -1,7 +1,10 @@
 import Layout from "../components/layout";
 import "../styles/pages/infoPages.css";
-
+import { useEffect } from "react";
 const Contact = () => {
+  useEffect(() => {
+      document.title = "JatraPath | Contact";
+    }, []);
   return (
     <Layout>
       <div className="info-page">
