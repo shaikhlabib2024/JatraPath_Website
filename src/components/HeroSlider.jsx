@@ -50,7 +50,7 @@ const HeroSlider = () => {
           />
         ))}
 
-        <div className="overlay">
+        <div className="overlay1">
 
           <h1>Discover Beautiful Bangladesh</h1>
 

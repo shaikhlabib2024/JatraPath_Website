@@ -35,9 +35,8 @@
 }
 
 /* overlay */
-.overlay {
+.overlay1 {
   position: absolute;
-
   top: 0;
   left: 0;
 
@@ -55,13 +54,13 @@
   color: white;
 }
 
-.overlay h1 {
+.overlay1 h1 {
   font-size: 70px;
   font-weight: 700;
   margin-bottom: 20px;
 }
 
-.overlay p {
+.overlay1 p {
   font-size: 22px;
   margin-bottom: 30px;
 }
@@ -106,7 +105,7 @@
 
 /* responsive */
 @media (max-width: 768px) {
-  .overlay h1 {
+  .overlay1 h1 {
     font-size: 40px;
   }
 
