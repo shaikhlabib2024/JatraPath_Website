@@ -2,7 +2,7 @@
   "name": "jatra_path",
   "homepage": "https://BadhonKumarRoy.github.io/JatraPath_Website/",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
