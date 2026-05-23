@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { NavLink } from "react-router-dom";
 import Layout from "../components/layout.jsx";
 import HeroSlider from "../components/HeroSlider";
 import "./../styles/pages/Home.css";
@@ -67,13 +68,13 @@ const Home = () => {
             </p>
 
             <div className="hero-buttons">
-              <a href="/destinations" className="primary-btn">
+              <NavLink to="/destinations" className="primary-btn">
                 Explore Destinations
-              </a>
+              </NavLink>
 
-              <a href="/about" className="secondary-btn">
+              <NavLink to="/contact" className="secondary-btn">
                 Learn More
-              </a>
+              </NavLink>
             </div>
 
             <div className="hero-stats">
